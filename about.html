@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>About</title>
+</head>
+<body style="background: url('your-about-background-image.jpg') center/cover no-repeat fixed;">
+    <header>
+        <div class="container" id="span1">
+            <h1 class="logo"> Aashirwad Hostel</h1>
+            <h3 class="logo">The Second Home</h3>
+    
+            <nav>
+                <ul>
+                    <li><a href="HOME.HTML">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+                </ul>
+            </nav>
+        </div>
+    </header> <!-- Side navigation bar -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="add_student_detail.HTML">Add Student Detail</a>
+        <a href="students_complain.html">Students complain</a>
+        <a href="about.html">Camaras</a>
+        <a href="pricing.html">Room Avaibility</a>
+        
+    </div>
+
+
+    <div class="content">
+        <div class="container">
+            <h2>Aashirwad Hostel</h2>
+            <p>The Second Home</p>
+            <p>Oposite to Charotar university of science and technology , behind prince hostel , near Bharvad vada , changa </p>
+        </div>
+    </div>
+
+    <script>
+         function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+    
+
+</body>
+</html>

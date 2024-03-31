@@ -1,0 +1,142 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>Document</title>
+    
+      
+</head>
+<body>
+    <header>
+        <div class="container" id="span1">
+            <h1 class="logo"> Aashirwad Hostel</h1>
+            <h3 class="logo">The Second Home</h3>
+    
+            <nav>
+                <ul>
+                    <li><a href="HOME.HTML">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Side navigation bar -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="add_student_detail.HTML">Add Student Detail</a>
+        <a href="students_complain.html">Students complain</a>
+        <a href="about.html">Camaras</a>
+        <a href="pricing.html">Room Avaibility</a>
+        
+    </div>
+
+    <section class="photos">
+        <div class="container">
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 1', 'Some description for photo 1.')">
+                <img src="one.png" alt="Photo 1">
+                <h3>Photo 1</h3>
+                <p>Some description for photo 1.</p>
+            </div>
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 2', 'Some description for photo 2.')">
+                <img src="one.png" alt="Photo 2">
+                <h3>Photo 2</h3>
+                <p>Some description for photo 2.</p>
+            </div>
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 3', 'Some description for photo 3.')">
+                <img src="one.png" alt="Photo 3">
+                <h3>Photo 3</h3>
+                <p>Some description for photo 3.</p>
+            </div>
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 4', 'Some description for photo 4.')">
+                <img src="one.png" alt="Photo 4">
+                <h3>Photo 4</h3>
+                <p>Some description for photo 4.</p>
+            </div>
+        </div>
+    </section>
+    <section class="photos">
+        <div class="container">
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 1', 'Some description for photo 1.')">
+                <img src="one.png" alt="Photo 1">
+                <h3>Photo 1</h3>
+                <p>Some description for photo 1.</p>
+            </div>
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 2', 'Some description for photo 2.')">
+                <img src="one.png" alt="Photo 2">
+                <h3>Photo 2</h3>
+                <p>Some description for photo 2.</p>
+            </div>
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 3', 'Some description for photo 3.')">
+                <img src="one.png" alt="Photo 3">
+                <h3>Photo 3</h3>
+                <p>Some description for photo 3.</p>
+            </div>
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 4', 'Some description for photo 4.')">
+                <img src="one.png" alt="Photo 4">
+                <h3>Photo 4</h3>
+                <p>Some description for photo 4.</p>
+            </div>
+            
+        </div>
+    </section>
+    <section class="photos">
+        <div class="container">
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 1', 'Some description for photo 1.')">
+                <img src="one.png" alt="Photo 1">
+                <h3>Photo 1</h3>
+                <p>Some description for photo 1.</p>
+            </div>
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 2', 'Some description for photo 2.')">
+                <img src="one.png" alt="Photo 2">
+                <h3>Photo 2</h3>
+                <p>Some description for photo 2.</p>
+            </div>
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 3', 'Some description for photo 3.')">
+                <img src="one.png" alt="Photo 3">
+                <h3>Photo 3</h3>
+                <p>Some description for photo 3.</p>
+            </div>
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 4', 'Some description for photo 4.')">
+                <img src="one.png" alt="Photo 4">
+                <h3>Photo 4</h3>
+                <p>Some description for photo 4.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enlarged image overlay -->
+    <div id="enlarged-image-container" class="enlarged-image" onclick="hideEnlarged()">
+        <img id="enlarged-image" src="" alt="Enlarged Image">
+    </div>
+
+    <script>
+        function showEnlarged(src, title, description) {
+            var enlargedImage = document.getElementById('enlarged-image');
+            enlargedImage.src = src;
+
+            var enlargedImageContainer = document.getElementById('enlarged-image-container');
+            enlargedImageContainer.style.display = 'flex';
+        }
+
+        function hideEnlarged() {
+            var enlargedImageContainer = document.getElementById('enlarged-image-container');
+            enlargedImageContainer.style.display = 'none';
+        }
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</body>
+</html>
+

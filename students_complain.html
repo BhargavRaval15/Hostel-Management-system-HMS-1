@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>Document</title>
+
+
+</head>
+<script>
+
+    function deletedone()
+    {
+        console.log("done delete")
+        var parentelement = document.getElementById("mainarea");
+
+// Assuming you want to remove the last child (recently deleted todo), you can use the following:
+parentelement.removeChild(parentelement.childelement);
+    }
+
+    function deletetodo(id)
+    {
+        console.log(id);
+
+        fetch("http://localhost:3000/studentcomp/" + id  , {
+            method : "DELETE",
+            headers : {"Content-Type":"application/json"}
+        }).then(deletedone)
+        
+    }
+    function deletetodo(id) {
+    console.log(id);
+
+    fetch("http://localhost:3000/studentcomp/" + id, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
+    }).then(response => {
+        if (response.ok) {
+            // Handle successful deletion
+            console.log("Todo deleted successfully.");
+            // You might want to update the UI or perform other actions here
+        } else {
+            // Handle failed deletion
+            console.error("Failed to delete todo.");
+            // You might want to display an error message or perform other actions here
+        }
+    }).catch(error => {
+        // Handle fetch error
+        console.error("Error deleting todo:", error);
+        // You might want to display an error message or perform other actions here
+    });
+}
+
+
+
+    function todoscallback(data) {
+        console.log(data);
+        var parentelement = document.getElementById("maiarea");
+
+        for (var i = 0; i < data.length; i++) {
+            var childelement = document.createElement("div");
+
+            var grandchild1 = document.createElement("span");
+            grandchild1.innerHTML = data[i].name
+
+            var grandchild2 = document.createElement("span")
+            grandchild2.innerHTML = data[i].rn
+
+            var grandchild3 = document.createElement("span")
+            grandchild3.innerHTML = data[i].ComplaintType
+
+            var grandchild4 = document.createElement("span")
+            grandchild4.innerHTML = data[i].ComplaintDetail
+
+            var grandchild5 = document.createElement("button")
+            grandchild5.innerHTML = "Delete"
+
+            grandchild5.setAttribute("onclick","deletetodo(" +  data[i].id + ")")
+
+            childelement.append(grandchild1)
+            childelement.append(grandchild2)
+            childelement.append(grandchild3)
+            childelement.append(grandchild4)
+            childelement.append(grandchild5)
+
+            parentelement.appendChild(childelement);
+
+        }
+
+
+
+        // parentelement.innerHTML = JSON.stringify(data);
+    }
+
+    function callback2(resp) {
+        resp.json().then(todoscallback);
+    }
+
+    function getdata() {
+        fetch("http://localhost:3000/studentcomp", {
+            method: "GET",
+        }).then(callback2)
+    }
+    getdata();
+
+    function parseResponce(data) {
+        console.log("one");
+        console.log(data);
+        var parentelement = document.getElementById("maiarea");
+
+        var childelement = document.createElement("div");
+
+        var grandchild1 = document.createElement("span");
+        grandchild1.innerHTML = data.name
+        console.log(grandchild1.innerHTML)
+
+        var grandchild2 = document.createElement("span")
+        grandchild2.innerHTML = data.rn
+        console.log(grandchild1.innerHTML)
+
+        var grandchild3 = document.createElement("span")
+        grandchild3.innerHTML = data.ComplaintType
+        console.log(grandchild1.innerHTML)
+
+        var grandchild4 = document.createElement("span")
+        grandchild4.innerHTML = data.ComplaintDetail
+        console.log(grandchild1.innerHTML)
+
+        var grandchild5 = document.createElement("button")
+        grandchild5.innerHTML = " Delete"
+
+        childelement.append(grandchild1)
+        childelement.append(grandchild2)
+        childelement.append(grandchild3)
+        childelement.append(grandchild4)
+        childelement.append(grandchild5)
+
+        parentelement.appendChild(childelement);
+    }
+
+    function callback(resp) {
+        resp.json().then(parseResponce)
+    }
+    function addTodo() {
+
+        console.log("one");
+
+
+        
+        var name = document.getElementById("studentName").value;
+        var rn = document.getElementById("roomNumber").value;
+
+        var ct = document.getElementById("complaintType").value;
+        var cd = document.getElementById("complaintDetails").value;
+
+
+        fetch("http://localhost:3000/studentcomp", {
+            method: "POST",
+            body: JSON.stringify({
+                name:name,
+                rn:rn,
+                ComplaintType:ct,
+                ComplaintDetail:cd
+            }),
+            headers: {
+                "content-type": "application/json"
+            }
+
+        }).then(callback)
+    }
+
+
+</script>
+
+<body>
+    <header>
+        <div class="container" id="span1">
+            <h1 class="logo"> Aashirwad Hostel</h1>
+            <h3 class="logo">The Second Home</h3>
+
+            <nav>
+                <ul>
+                    <li><a href="HOME.HTML">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Side navigation bar -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="add_student_detail.HTML">Add Student Detail</a>
+        <a href="students_complain.html">Students complain</a>
+        <a href="about.html">Camaras</a>
+        <a href="pricing.html">Room Avaibility</a>
+
+    </div>
+    <div id="enlarged-image-container" class="enlarged-image" onclick="hideEnlarged()">
+        <img id="enlarged-image" src="" alt="Enlarged Image">
+    </div>
+
+    <script>
+        function showEnlarged(src, title, description) {
+            var enlargedImage = document.getElementById('enlarged-image');
+            enlargedImage.src = src;
+
+            var enlargedImageContainer = document.getElementById('enlarged-image-container');
+            enlargedImageContainer.style.display = 'flex';
+        }
+
+        function hideEnlarged() {
+            var enlargedImageContainer = document.getElementById('enlarged-image-container');
+            enlargedImageContainer.style.display = 'none';
+        }
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+    <div class="container1">
+        <h2>Hostel Complaint Form</h2>
+        <form id="complaintForm">
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" required>
+
+            <label for="roomNumber">Room Number:</label>
+            <input type="text" id="roomNumber" name="roomNumber" required>
+
+            <label for="complaintType">Complaint Type:</label>
+            <select id="complaintType" name="complaintType" required>
+                <option value="">Select Complaint Type</option>
+                <option value="Noise">Noise</option>
+                <option value="Hygiene">Hygiene</option>
+                <option value="Facilities">Facilities</option>
+                <option value="Security">Security</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="complaintDetails">Complaint Details:</label>
+            <textarea id="complaintDetails" name="complaintDetails" rows="4" required></textarea>
+
+            <button type="submit" onclick="addTodo()">Submit Complaint</button>
+        </form>
+    </div>
+
+
+
+
+    <div id="maiarea">
+
+        <h1>hello</h1>
+    </div>
+
+
+
+</body>
+
+</html>
+

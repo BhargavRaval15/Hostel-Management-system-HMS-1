@@ -1,0 +1,456 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>Document</title>
+
+
+</head>
+<script>
+
+    function deletedone() {
+        console.log("done delete")
+        //         var parentelement = document.getElementById("mainarea");
+
+        // // Assuming you want to remove the last child (recently deleted todo), you can use the following:
+        // parentelement.removeChild(parentelement.childelement);
+    }
+
+    function deletestudent(id) {
+        console.log(id);
+
+        fetch("http://localhost:3002/students/" + id, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" }
+        }).then(deletedone)
+
+    }
+    function studentscallback(data) {
+
+        var parentelement = document.getElementById("maiarea");
+
+        for (var i = 0; i < data.length; i++) {
+
+
+            console.log(data[i].name);
+            console.log(data[i].rn);
+            console.log(data[i].phone);
+            console.log(data[i].e_c);
+            console.log();
+            var childelement = document.createElement("div");
+
+            var grandchild1 = document.createElement("span");
+            grandchild1.innerHTML = "Name: " + data[i].name;
+
+            var grandchild2 = document.createElement("span");
+            grandchild2.innerHTML = "Room Number: " + data[i].rn;
+            var grandchild3 = document.createElement("span");
+            grandchild3.innerHTML = "phone: " + data[i].phone;
+
+            var grandchild4 = document.createElement("span");
+            grandchild4.innerHTML = "bloodgroup: " + data[i].e_c;
+
+            var grandchild5 = document.createElement("button");
+            grandchild5.innerHTML = " Delete";
+            grandchild5.setAttribute("onclick", "deletestudent(" + data[i].id + ")")
+
+            console.log("Child elements created successfully.");
+
+            childelement.append(grandchild1);
+            childelement.append(grandchild2);
+            childelement.append(grandchild3);
+            childelement.append(grandchild4);
+
+            childelement.append(grandchild5);
+
+
+            console.log("Child elements appended to parent.");
+
+            parentelement.appendChild(childelement);
+
+
+
+
+
+        }
+
+
+
+        // parentelement.innerHTML = JSON.stringify(data);
+    }
+
+    function callback2(resp) {
+        resp.json().then(studentscallback);
+    }
+
+    function getdata() {
+        fetch("http://localhost:3002/students", {
+            method: "GET",
+        }).then(callback2)
+    }
+    getdata();
+
+    function parseResponce(data) {
+        console.log("Response data:", data);
+
+        try {
+            var parentelement = document.getElementById("maiarea");
+
+            if (!parentelement) {
+                console.error("Parent element not found.");
+                return;
+            }
+
+            var childelement = document.createElement("div");
+
+            var grandchild1 = document.createElement("span");
+            grandchild1.innerHTML = "Name: " + data.name;
+
+
+            var grandchild2 = document.createElement("span");
+            grandchild2.innerHTML = "Room Number: " + data.rn;
+            console.log(grandchild2.innerHTML);
+
+
+            var grandchild3 = document.createElement("span");
+            grandchild3.innerHTML = "phone: " + data.phone;
+
+
+
+            var grandchild4 = document.createElement("span");
+            grandchild4.innerHTML = "bloodgroup: " + data.bg;
+
+            var grandchild5 = document.createElement("button");
+            grandchild5.innerHTML = " Delete";
+
+
+            console.log("Child elements created successfully.");
+
+            childelement.append(grandchild1);
+            childelement.append(grandchild2);
+            childelement.append(grandchild3);
+            childelement.append(grandchild4);
+
+            childelement.append(grandchild5);
+
+
+            console.log("Child elements appended to parent.");
+
+            parentelement.appendChild(childelement);
+
+            console.log("Child element appended to parent element.");
+        } catch (error) {
+            console.error("Error in parseResponce:", error);
+        }
+    }
+
+
+
+    function callback(resp) {
+
+        resp.json().then(parseResponce)
+    }
+    function addstudent() {
+        console.log("HERE ENTER !!!");
+        var name = document.getElementById("studentName").value;
+        var r_n = document.getElementById("roomNumber").value;
+        var phone = document.getElementById("phoneNumber").value;
+        var e_c = document.getElementById("emergency").value;
+        var b_g = document.getElementById("Blood").value;
+
+
+
+        fetch("http://localhost:3002/students", {
+            method: "POST",
+            body: JSON.stringify({
+                name: name,
+                rn: r_n,
+                phone: phone,
+                e_c: e_c,
+                bg: b_g
+            }),
+            headers: {
+                "content-type": "application/json"
+            }
+
+        }).then(callback)
+    }
+
+</script>
+
+<body>
+    <header>
+        <div class="container" id="span1">
+            <h1 class="logo"> Aashirwad Hostel</h1>
+            <h3 class="logo">The Second Home</h3>
+
+            <nav>
+                <ul>
+                    <li><a href="HOME.HTML">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="add_student_detail.HTML">Add Student Detail</a>
+        <a href="contact.html">Students</a>
+        <a href="about.html">Camaras</a>
+        <a href="pricing.html">Room Avaibility</a>
+
+    </div>
+    <script>
+        function showEnlarged(src, title, description) {
+            var enlargedImage = document.getElementById('enlarged-image');
+            enlargedImage.src = src;
+
+            var enlargedImageContainer = document.getElementById('enlarged-image-container');
+            enlargedImageContainer.style.display = 'flex';
+        }
+
+        function hideEnlarged() {
+            var enlargedImageContainer = document.getElementById('enlarged-image-container');
+            enlargedImageContainer.style.display = 'none';
+        }
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+    <div class="form-container">
+        <h2 style="text-align: center;">Student Information</h2>
+        <form>
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" required>
+
+            <label for="roomNumber">Room Number:</label>
+            <input type="text" id="roomNumber" name="roomNumber" required>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required>
+
+            <label for="parents_phoneNumber"> Emergency contact:</label>
+            <input type="text" id="emergency" name="phoneNumber" required>
+
+            <label for="phoneNumber">Blood Group</label>
+            <input type="text" id="Blood" name="phoneNumber" required>
+
+            <button type="button" onclick="addstudent()" style="width: 100%;">submit</button>
+
+        </form>
+    </div>
+
+    <section class="photos">
+        <div class="container" id="maiarea">
+            <div class="photo" onclick="showEnlarged('one.png', 'Photo 1', 'Some description for photo 1.')">
+                <img src="one.png" alt="Photo 1">
+                <h3>Photo 1</h3>
+                <p>Some description for photo 1.</p>
+            </div>
+
+
+        </div>
+    </section>
+
+
+
+    <div id="maiarea">
+
+        <h1>hello</h1>
+    </div>
+
+
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <div class="container" id="span1">
+            <h1 class="logo">Aashirwad Hostel</h1>
+            <h3 class="logo">The Second Home</h3>
+            <nav>
+                <ul>
+                    <li><a href="HOME.HTML">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Side navigation bar -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="add_student_detail.HTML">Add Student Detail</a>
+        <a href="contact.html">Students</a>
+        <a href="about.html">Camaras</a>
+        <a href="pricing.html">Room Availability</a>
+    </div>
+
+    <div class="form-container">
+        <h2 style="text-align: center;">Student Information</h2>
+        <form>
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" required>
+
+            <label for="roomNumber">Room Number:</label>
+            <input type="text" id="roomNumber" name="roomNumber" required>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required>
+
+            <label for="parents_phoneNumber">Emergency contact:</label>
+            <input type="text" id="emergency" name="emergency" required>
+
+            <label for="Blood">Blood Group</label>
+            <input type="text" id="Blood" name="Blood" required>
+
+            <label for="photoUrl">Photo URL</label>
+            <input type="text" id="photoUrl" name="photoUrl" required>
+
+            <button type="button" onclick="addStudent()" style="width: 100%;">Submit</button>
+        </form>
+    </div>
+
+    <section class="photos">
+        <div class="container" id="studentList">
+            <!-- Student information will be dynamically populated here -->
+        </div>
+    </section>
+
+    <!-- Enlarged image overlay -->
+    <div id="enlarged-image-container" onclick="hideEnlarged()">
+        <img id="enlarged-image" src="" alt="Enlarged Photo">
+    </div>
+
+    <script>
+        function showEnlarged(src, title, description) {
+            var enlargedImage = document.getElementById('enlarged-image');
+            enlargedImage.src = src;
+
+            var enlargedImageContainer = document.getElementById('enlarged-image-container');
+            enlargedImageContainer.style.display = 'flex';
+        }
+
+        function hideEnlarged() {
+            var enlargedImageContainer = document.getElementById('enlarged-image-container');
+            enlargedImageContainer.style.display = 'none';
+        }
+
+        function deleteStudent(id) {
+            fetch("http://localhost:3002/students/" + id, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" }
+            }).then(function () {
+                // Remove the deleted student element from the UI
+                var studentElement = document.getElementById("student-" + id);
+                if (studentElement) {
+                    studentElement.remove();
+                }
+            });
+        }
+
+        function renderStudent(student) {
+            var studentList = document.getElementById("studentList");
+
+            var studentDiv = document.createElement("div");
+            studentDiv.classList.add("photo");
+            studentDiv.id = "student-" + student.id;
+
+            var studentImage = document.createElement("img");
+            studentImage.src = student.photoUrl;
+            studentImage.alt = student.name;
+            studentImage.onclick = function () {
+                showEnlarged(student.photoUrl, student.name, `Room Number: ${student.rn}<br>Phone: ${student.phone}<br>Emergency Contact: ${student.e_c}<br>Blood Group: ${student.bg}`);
+            };
+
+            var studentName = document.createElement("h3");
+            studentName.textContent = student.name;
+
+            var deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.onclick = function () {
+                deleteStudent(student.id);
+            };
+
+            studentDiv.appendChild(studentImage);
+            studentDiv.appendChild(studentName);
+            studentDiv.appendChild(deleteButton);
+
+            studentList.appendChild(studentDiv);
+        }
+
+        function fetchStudents() {
+            fetch("http://localhost:3002/students", {
+                method: "GET",
+            }).then(function (resp) {
+                return resp.json();
+            }).then(function (data) {
+                data.forEach(function (student) {
+                    renderStudent(student);
+                });
+            });
+        }
+
+        function addStudent() {
+            var name = document.getElementById("studentName").value;
+            var rn = document.getElementById("roomNumber").value;
+            var phone = document.getElementById("phoneNumber").value;
+            var e_c = document.getElementById("emergency").value;
+            var bg = document.getElementById("Blood").value;
+            var photoUrl = document.getElementById("photoUrl").value;
+
+            var studentData = {
+                name: name,
+                rn: rn,
+                phone: phone,
+                e_c: e_c,
+                bg: bg,
+                photoUrl: photoUrl
+            };
+
+            fetch("http://localhost:3002/students", {
+                method: "POST",
+                body: JSON.stringify(studentData),
+                headers: {
+                    "content-type": "application/json"
+                }
+            }).then(function (resp) {
+                return resp.json();
+            }).then(function (student) {
+                renderStudent(student);
+            });
+        }
+
+        // Call fetchStudents when the page loads to populate student data
+        fetchStudents();
+    </script>
+</body>
+
+</html>
